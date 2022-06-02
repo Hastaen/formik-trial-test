@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import Button from '@mui/material/Button';
-import './App.css';
+import './Simple.css';
 
 const SignupForm = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
@@ -30,7 +30,7 @@ const SignupForm = () => {
   );
 };
 
-function App() {
+function Simple() {
   return (
     <div className="App">
       <header className="App-header">
@@ -43,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default Simple;
