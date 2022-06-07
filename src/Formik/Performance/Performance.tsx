@@ -81,25 +81,26 @@ const fields = [
 ];
 
 const getInitialValues = (fields: any[]) => {
-  const initialValues = {};
-  fields.forEach(({ name, initialValue }, index) => {
-    // @ts-ignore
-    initialValues[`${name}-${index}`] = initialValue;
-  });
-  return initialValues;
+  return fields.reduce(
+    (prev, { initialValue, name }, index) => ({
+      ...prev,
+      // @ts-ignore
+      [`${name}-${index}`]: initialValue,
+    }),
+    {}
+  );
 };
 
 const getSchema = (fields: any[]) => {
-  let schema = {};
-  fields.forEach(({ name }, index) => {
-    // @ts-ignore
-    schema = {
-      ...schema,
+  const schemaFields = fields.reduce(
+    (prev, { name }, index) => ({
+      ...prev,
       // @ts-ignore
       [`${name}-${index}`]: shapes[name],
-    };
-  });
-  return Yup.object().shape(schema);
+    }),
+    {}
+  );
+  return Yup.object().shape(schemaFields);
 };
 
 const SignupForm = () => {
@@ -117,20 +118,21 @@ const SignupForm = () => {
       <Grid container alignItems="start" direction="row" spacing={2}>
         {fields.map(({ name, id, label }, index) => {
           return (
-            <Grid item xs={6} sm={4} md={3}>
+            <Grid key={`field-${index}`} item xs={6} sm={4} md={3}>
               <Box display="flex" alignItems="start" flexDirection="column">
                 <TextField
                   id={`${id}-${index}`}
                   name={`${name}-${index}`}
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
+                  variant="outlined"
                   // @ts-ignore
                   value={formik.values[`${name}-${index}`]}
                   // @ts-ignore
                   {...(formik.errors[`${name}-${index}`] && {
                     error: true,
                     // @ts-ignore
-                    helperText: formik.errors[`${name}-${index}`],
+                    helperText: formik.errors[`${name}-${index}`]?.toString(),
                   })}
                 />
               </Box>
