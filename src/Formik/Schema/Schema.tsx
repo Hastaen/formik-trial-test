@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
-import "./Schema.css";
 import { Box, Grid } from "@mui/material";
 import * as Yup from "yup";
 
@@ -114,9 +113,7 @@ const SignupForm = () => {
               onChange={formik.handleChange}
               value={formik.values.age}
             />
-            {formik.errors.age && (
-              <span>{formik.errors.age}</span>
-            )}
+            {formik.errors.age && <span>{formik.errors.age}</span>}
           </Box>
         </Grid>
 
@@ -131,10 +128,8 @@ const SignupForm = () => {
 function Schema() {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR</header>
-      <body>
-        <SignupForm />
-      </body>
+      <header className="App-header">Formik ADR: Schema</header>
+      <SignupForm />
     </div>
   );
 }

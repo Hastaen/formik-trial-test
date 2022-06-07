@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
-import "./Material.css";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
 
@@ -51,9 +50,9 @@ const SignupForm = () => {
   });
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid container alignItems="start" direction="column">
-        <Grid item>
-          <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
+      <Grid container alignItems="start" direction="row" spacing={2}>
+        <Grid item xs={6} sm={4} md={3}>
+          <Box display="flex" alignItems="start" flexDirection="column">
             <TextField
               id="name"
               name="name"
@@ -67,8 +66,8 @@ const SignupForm = () => {
             />
           </Box>
         </Grid>
-        <Grid item>
-          <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
+        <Grid item xs={6} sm={4} md={3}>
+          <Box display="flex" alignItems="start" flexDirection="column">
             <TextField
               id="surname"
               name="surname"
@@ -82,8 +81,8 @@ const SignupForm = () => {
             />
           </Box>
         </Grid>
-        <Grid item>
-          <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
+        <Grid item xs={6} sm={4} md={3}>
+          <Box display="flex" alignItems="start" flexDirection="column">
             <TextField
               id="email"
               name="email"
@@ -97,10 +96,10 @@ const SignupForm = () => {
             />
           </Box>
         </Grid>
-        <Grid item>
-          <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
+        <Grid item xs={6} sm={4} md={3}>
+          <Box display="flex" alignItems="start" flexDirection="column">
             <TextField
-            type="password"
+              type="password"
               id="password"
               name="password"
               label="Password"
@@ -113,8 +112,8 @@ const SignupForm = () => {
             />
           </Box>
         </Grid>
-        <Grid item>
-          <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
+        <Grid item xs={6} sm={4} md={3}>
+          <Box display="flex" alignItems="start" flexDirection="column">
             <TextField
               id="age"
               name="age"
@@ -140,10 +139,8 @@ const SignupForm = () => {
 function Material() {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR</header>
-      <body>
-        <SignupForm />
-      </body>
+      <header className="App-header">Formik ADR: Material</header>
+      <SignupForm />
     </div>
   );
 }

@@ -1,16 +1,15 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import Button from '@mui/material/Button';
-import './Simple.css';
+import React from "react";
+import { useFormik } from "formik";
+import Button from "@mui/material/Button";
 
 const SignupForm = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: "",
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
   });
@@ -33,12 +32,8 @@ const SignupForm = () => {
 function Simple() {
   return (
     <div className="App">
-      <header className="App-header">
-        Formik ADR
-      </header>
-      <body>
-        <SignupForm />
-      </body>
+      <header className="App-header">Formik ADR: Simple</header>
+      <SignupForm />
     </div>
   );
 }

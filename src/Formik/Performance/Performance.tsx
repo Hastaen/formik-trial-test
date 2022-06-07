@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
-import "./Performance.css";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
 
@@ -142,10 +141,9 @@ const SignupForm = () => {
 
       <Grid container alignItems="start" direction="row" spacing={2}>
         <Grid item mt={2}>
-
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
         </Grid>
       </Grid>
     </form>
@@ -155,10 +153,8 @@ const SignupForm = () => {
 function Performance() {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR</header>
-      <body>
-        <SignupForm />
-      </body>
+      <header className="App-header">Formik ADR: Performance</header>
+      <SignupForm />
     </div>
   );
 }
