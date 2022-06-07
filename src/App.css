@@ -22,6 +22,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-bottom: 16px;
 }
 
 body {
@@ -30,6 +31,10 @@ body {
 
 .App-link {
   color: #61dafb;
+}
+
+.MuiFormControl-root {
+  width: 100%;
 }
 
 @keyframes App-logo-spin {
