@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormik } from "formik";
+import { useFormik, Formik, Form, Field } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
@@ -48,6 +48,7 @@ const SignupForm = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+  console.log('formik.touched.age', formik.touched.age)
   return (
     <form onSubmit={formik.handleSubmit}>
       <Grid container alignItems="start" direction="row" spacing={2}>
@@ -59,7 +60,7 @@ const SignupForm = () => {
               label="Name"
               onChange={formik.handleChange}
               value={formik.values.name}
-              {...(formik.errors.name && {
+              {...(formik.errors.name  && formik.touched.name && {
                 error: true,
                 helperText: formik.errors.name,
               })}
@@ -74,7 +75,7 @@ const SignupForm = () => {
               label="Surname"
               onChange={formik.handleChange}
               value={formik.values.surname}
-              {...(formik.errors.surname && {
+              {...(formik.errors.surname  && formik.touched.surname && {
                 error: true,
                 helperText: formik.errors.surname,
               })}
@@ -89,7 +90,7 @@ const SignupForm = () => {
               label="Email Address"
               onChange={formik.handleChange}
               value={formik.values.email}
-              {...(formik.errors.email && {
+              {...(formik.errors.email && formik.touched.email && {
                 error: true,
                 helperText: formik.errors.email,
               })}
@@ -105,7 +106,7 @@ const SignupForm = () => {
               label="Password"
               onChange={formik.handleChange}
               value={formik.values.password}
-              {...(formik.errors.password && {
+              {...(formik.errors.password  && formik.touched.password && {
                 error: true,
                 helperText: formik.errors.password,
               })}
@@ -120,17 +121,20 @@ const SignupForm = () => {
               label="Age"
               onChange={formik.handleChange}
               value={formik.values.age}
-              {...(formik.errors.age && {
+              {...(formik.errors.age  && formik.touched.age && {
                 error: true,
                 helperText: formik.errors.age,
               })}
             />
           </Box>
         </Grid>
-
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
+      </Grid>
+      <Grid container alignItems="start" direction="row" spacing={2}  mt={2}>
+        <Grid item>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+        </Grid>
       </Grid>
     </form>
   );

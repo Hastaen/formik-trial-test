@@ -129,7 +129,7 @@ const SignupForm = () => {
                   // @ts-ignore
                   value={formik.values[`${name}-${index}`]}
                   // @ts-ignore
-                  {...(formik.errors[`${name}-${index}`] && {
+                  {...(formik.errors[`${name}-${index}`] &&  formik.touched[`${name}-${index}`] &&{
                     error: true,
                     // @ts-ignore
                     helperText: formik.errors[`${name}-${index}`]?.toString(),
