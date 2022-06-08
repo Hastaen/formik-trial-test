@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormik, Formik, Form, Field } from "formik";
+import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
@@ -48,7 +48,6 @@ const SignupForm = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-  console.log('formik.touched.age', formik.touched.age)
   return (
     <form onSubmit={formik.handleSubmit}>
       <Grid container alignItems="start" direction="row" spacing={2}>
