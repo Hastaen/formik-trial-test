@@ -1,8 +1,16 @@
 import React from "react";
-import { useFormik, Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikProps, FieldProps } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
+
+interface FormValues {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  age: string;
+}
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -33,23 +41,6 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignupForm = () => {
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      name: "",
-      surname: "",
-      password: "",
-      age: "",
-    },
-    validationSchema: SignupSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-  console.log('formik.touched.age', formik.touched.age)
-
   return (
     <>
       < Formik
@@ -65,28 +56,26 @@ const SignupForm = () => {
           alert(JSON.stringify(values, null, 2));
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <Grid container alignItems="start" direction="row" spacing={2}>
               <Grid item xs={6} sm={4} md={3}>
                 <Box display="flex" alignItems="start" flexDirection="column">
                   <Field name="name">
                     {({
-                      //@ts-ignore
                       field, // { name, value, onChange, onBlur }
-                      //@ts-ignore
                       form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                      //@ts-ignore
                       meta,
-                    }) => (
+                    }: FieldProps<string, FormValues>) => (
                       <>
                         <TextField
                           label="Name"
+                          variant="outlined"
                           {...(field)}
                           {...(errors.name && touched.name && {
                             // {...(meta.touched && meta.error && {
                             error: true,
-                            helperText: errors.name,
+                            helperText: errors.name.toString(),
                           })}
                         />
                       </>
@@ -98,19 +87,15 @@ const SignupForm = () => {
                 <Box display="flex" alignItems="start" flexDirection="column">
                   <Field name="surname">
                     {({
-                      //@ts-ignore
-                      field, // { name, value, onChange, onBlur }
-                      //@ts-ignore
-                      form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                      //@ts-ignore
+                      field, 
+                      form: { touched, errors }, 
                       meta,
-                    }) => (
+                    }: FieldProps<string, FormValues>) => (
                       <>
                         <TextField
                           label="Surname"
                           {...(field)}
                           {...(errors.surname && touched.surname && {
-                            // {...(meta.touched && meta.error && {
                             error: true,
                             helperText: errors.surname,
                           })}
@@ -124,19 +109,15 @@ const SignupForm = () => {
                 <Box display="flex" alignItems="start" flexDirection="column">
                   <Field name="email">
                     {({
-                      //@ts-ignore
-                      field, // { name, value, onChange, onBlur }
-                      //@ts-ignore
-                      form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                      //@ts-ignore
+                      field, 
+                      form: { touched, errors }, 
                       meta,
-                    }) => (
+                    }: FieldProps<string, FormValues>) => (
                       <>
                         <TextField
                           label="Email"
                           {...(field)}
                           {...(errors.email && touched.email && {
-                            // {...(meta.touched && meta.error && {
                             error: true,
                             helperText: errors.email,
                           })}
@@ -150,19 +131,15 @@ const SignupForm = () => {
                 <Box display="flex" alignItems="start" flexDirection="column">
                   <Field name="password">
                     {({
-                      //@ts-ignore
-                      field, // { name, value, onChange, onBlur }
-                      //@ts-ignore
-                      form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                      //@ts-ignore
+                      field, 
+                      form: { touched, errors }, 
                       meta,
-                    }) => (
+                    }: FieldProps<string, FormValues>) => (
                       <>
                         <TextField
                           label="Password"
                           {...(field)}
                           {...(errors.password && touched.password && {
-                            // {...(meta.touched && meta.error && {
                             error: true,
                             helperText: errors.password,
                           })}
@@ -176,19 +153,15 @@ const SignupForm = () => {
                 <Box display="flex" alignItems="start" flexDirection="column">
                   <Field name="age">
                     {({
-                      //@ts-ignore
-                      field, // { name, value, onChange, onBlur }
-                      //@ts-ignore
-                      form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                      //@ts-ignore
+                      field,
+                      form: { touched, errors }, 
                       meta,
-                    }) => (
+                    }: FieldProps<string, FormValues>) => (
                       <>
                         <TextField
                           label="Age"
                           {...(field)}
                           {...(errors.age && touched.age && {
-                            // {...(meta.touched && meta.error && {
                             error: true,
                             helperText: errors.age,
                           })}
