@@ -61,7 +61,7 @@ const SignupForm = () => {
               onChange={formik.handleChange}
               value={formik.values.name}
             />
-            {formik.errors.name && <span>{formik.errors.name}</span>}
+            {formik.errors.name && formik.touched.name && <span>{formik.errors.name}</span>}
           </Box>
         </Grid>
         <Grid item>
@@ -74,7 +74,7 @@ const SignupForm = () => {
               onChange={formik.handleChange}
               value={formik.values.surname}
             />
-            {formik.errors.surname && <span>{formik.errors.surname}</span>}
+            {formik.errors.surname && formik.touched.surname && <span>{formik.errors.surname}</span>}
           </Box>
         </Grid>
         <Grid item>
@@ -87,7 +87,7 @@ const SignupForm = () => {
               onChange={formik.handleChange}
               value={formik.values.email}
             />
-            {formik.errors.email && <span>{formik.errors.email}</span>}
+            {formik.errors.email && formik.touched.email && <span>{formik.errors.email}</span>}
           </Box>
         </Grid>
         <Grid item>
@@ -100,7 +100,7 @@ const SignupForm = () => {
               onChange={formik.handleChange}
               value={formik.values.password}
             />
-            {formik.errors.password && <span>{formik.errors.password}</span>}
+            {formik.errors.password && formik.touched.password && <span>{formik.errors.password}</span>}
           </Box>
         </Grid>
         <Grid item>
@@ -113,7 +113,7 @@ const SignupForm = () => {
               onChange={formik.handleChange}
               value={formik.values.age}
             />
-            {formik.errors.age && <span>{formik.errors.age}</span>}
+            {formik.errors.age && formik.touched.age && <span>{formik.errors.age}</span>}
           </Box>
         </Grid>
 
