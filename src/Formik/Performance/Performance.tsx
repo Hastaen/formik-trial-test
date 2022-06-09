@@ -4,7 +4,22 @@ import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
 
-const shapes = {
+interface FormValues {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  age: string;
+}
+
+interface FieldsValues {
+  id: string,
+  name: keyof FormValues,
+  label: string,
+  initialValue: string,
+}
+
+const shapes: Record<keyof FormValues, any> = {
   name: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
@@ -32,7 +47,7 @@ const shapes = {
     .required("Required"),
 };
 
-const defaultFields = [
+const defaultFields: FieldsValues[] = [
   {
     id: "name",
     name: "name",
@@ -80,22 +95,20 @@ const fields = [
   ...defaultFields,
 ];
 
-const getInitialValues = (fields: any[]) => {
+const getInitialValues = (fields: FieldsValues[]) => {
   return fields.reduce(
     (prev, { initialValue, name }, index) => ({
       ...prev,
-      // @ts-ignore
       [`${name}-${index}`]: initialValue,
     }),
     {}
   );
 };
 
-const getSchema = (fields: any[]) => {
+const getSchema = (fields: FieldsValues[]) => {
   const schemaFields = fields.reduce(
     (prev, { name }, index) => ({
       ...prev,
-      // @ts-ignore
       [`${name}-${index}`]: shapes[name],
     }),
     {}
