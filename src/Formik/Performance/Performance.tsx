@@ -95,7 +95,29 @@ const fields = [
   ...defaultFields,
 ];
 
-const getInitialValues = (fields: FieldsValues[]) => {
+const tenFields = [
+  ...defaultFields,
+  ...defaultFields,
+];
+
+const twentyFields = [
+  ...defaultFields,
+  ...defaultFields,
+  ...defaultFields,
+  ...defaultFields,
+];
+
+const thirtyFields = [
+  ...defaultFields,
+  ...defaultFields,
+  ...defaultFields,
+  ...defaultFields,
+  ...defaultFields,
+  ...defaultFields,
+];
+
+
+ export const getInitialValues = (fields: FieldsValues[]) => {
   return fields.reduce(
     (prev, { initialValue, name }, index) => ({
       ...prev,
@@ -105,7 +127,7 @@ const getInitialValues = (fields: FieldsValues[]) => {
   );
 };
 
-const getSchema = (fields: FieldsValues[]) => {
+export const getSchema = (fields: FieldsValues[]) => {
   const schemaFields = fields.reduce(
     (prev, { name }, index) => ({
       ...prev,
@@ -115,6 +137,57 @@ const getSchema = (fields: FieldsValues[]) => {
   );
   return Yup.object().shape(schemaFields);
 };
+
+const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
+  const { propFields } = props;
+  // Pass the useFormik() hook initial form values and a submit function that will
+  // be called when the form is submitted
+  const formik = useFormik({
+    initialValues: getInitialValues(propFields),
+    validationSchema: getSchema(propFields),
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <Grid container alignItems="start" direction="row" spacing={2}>
+        {propFields.map(({ name, id, label }, index) => {
+          return (
+            <Grid key={`field-${index}`} item xs={6} sm={4} md={3}>
+              <Box display="flex" alignItems="start" flexDirection="column">
+                <TextField
+                  id={`${id}-${index}`}
+                  name={`${name}-${index}`}
+                  label={`${label}-${index}`}
+                  onChange={formik.handleChange}
+                  variant="outlined"
+                  // @ts-ignore
+                  value={formik.values[`${name}-${index}`]}
+                  // @ts-ignore
+                  {...(formik.errors[`${name}-${index}`] && formik.touched[`${name}-${index}`] && {
+                    error: true,
+                    // @ts-ignore
+                    helperText: formik.errors[`${name}-${index}`]?.toString(),
+                  })}
+                />
+              </Box>
+            </Grid>
+          );
+        })}
+      </Grid>
+
+      <Grid container alignItems="start" direction="row" spacing={2}>
+        <Grid item mt={2}>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
+  );
+};
+
 
 const SignupForm = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
@@ -165,7 +238,34 @@ const SignupForm = () => {
   );
 };
 
-function Performance() {
+export const TenFieldsPerformance = () => {
+  return (
+    <div className="App">
+      <header className="App-header">Formik ADR: TenFieldsPerformance</header>
+      <FormBuilder propFields={tenFields} />
+    </div>
+  );
+}
+
+export const TwentyFieldsPerformance = () => {
+  return (
+    <div className="App">
+      <header className="App-header">Formik ADR: TwentyFieldsPerformance</header>
+      <FormBuilder propFields={twentyFields} />
+    </div>
+  );
+}
+
+export const ThirtyFieldsPerformance = () => {
+  return (
+    <div className="App">
+      <header className="App-header">Formik ADR: ThirtyFieldsPerformance</header>
+      <FormBuilder propFields={thirtyFields} />
+    </div>
+  );
+}
+
+export const Performance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Performance</header>
@@ -173,5 +273,3 @@ function Performance() {
     </div>
   );
 }
-
-export default Performance;
