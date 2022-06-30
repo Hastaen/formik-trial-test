@@ -238,7 +238,7 @@ const SignupForm = () => {
   );
 };
 
-export const TenFieldsPerformance = () => {
+export const FormikTenFieldsPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: TenFieldsPerformance</header>
@@ -247,7 +247,7 @@ export const TenFieldsPerformance = () => {
   );
 }
 
-export const TwentyFieldsPerformance = () => {
+export const FormikTwentyFieldsPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: TwentyFieldsPerformance</header>
@@ -256,7 +256,7 @@ export const TwentyFieldsPerformance = () => {
   );
 }
 
-export const ThirtyFieldsPerformance = () => {
+export const FormikThirtyFieldsPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: ThirtyFieldsPerformance</header>
@@ -265,7 +265,7 @@ export const ThirtyFieldsPerformance = () => {
   );
 }
 
-export const Performance = () => {
+export const FormikPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Performance</header>

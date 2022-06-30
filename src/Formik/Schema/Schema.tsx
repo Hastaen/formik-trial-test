@@ -125,7 +125,7 @@ const SignupForm = () => {
   );
 };
 
-function Schema() {
+function FormikSchema() {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Schema</header>
@@ -134,4 +134,4 @@ function Schema() {
   );
 }
 
-export default Schema;
+export default FormikSchema;
