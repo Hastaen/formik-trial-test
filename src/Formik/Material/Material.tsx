@@ -139,7 +139,7 @@ const SignupForm = () => {
   );
 };
 
-function Material() {
+function FormikMaterial() {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Material</header>
@@ -148,4 +148,4 @@ function Material() {
   );
 }
 
-export default Material;
+export default FormikMaterial;
