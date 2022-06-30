@@ -29,7 +29,7 @@ const SignupForm = () => {
   );
 };
 
-function Simple() {
+function FormikSimple() {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Simple</header>
@@ -38,4 +38,4 @@ function Simple() {
   );
 }
 
-export default Simple;
+export default FormikSimple;

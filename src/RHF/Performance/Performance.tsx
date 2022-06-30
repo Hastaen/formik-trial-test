@@ -238,37 +238,37 @@ const SignupForm = () => {
   );
 };
 
-export const FormikTenFieldsPerformance = () => {
+export const RHFTenFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: TenFieldsPerformance</header>
+      <header className="App-header">RHF ADR: TenFieldsPerformance</header>
       <FormBuilder propFields={tenFields} />
     </div>
   );
 }
 
-export const FormikTwentyFieldsPerformance = () => {
+export const RHFTwentyFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: TwentyFieldsPerformance</header>
+      <header className="App-header">RHF ADR: TwentyFieldsPerformance</header>
       <FormBuilder propFields={twentyFields} />
     </div>
   );
 }
 
-export const FormikThirtyFieldsPerformance = () => {
+export const RHFThirtyFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: ThirtyFieldsPerformance</header>
+      <header className="App-header">RHF ADR: ThirtyFieldsPerformance</header>
       <FormBuilder propFields={thirtyFields} />
     </div>
   );
 }
 
-export const FormikPerformance = () => {
+export const RHFPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: Performance</header>
+      <header className="App-header">RHF ADR: Performance</header>
       <SignupForm />
     </div>
   );
