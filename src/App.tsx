@@ -6,6 +6,7 @@ import {Performance, TenFieldsPerformance, TwentyFieldsPerformance, ThirtyFields
 import FormikComponents from "./Formik/FormikComponents/FormikComponents";
 import "./App.css";
 import { List, ListItem, Link } from "@mui/material";
+import AutoFocus from './Formik/Simple/Autofocus';
 
 export const App = () => {
   return (
@@ -13,6 +14,9 @@ export const App = () => {
       <List>
         <ListItem>
           <Link href="/formik/simple">Formik: Simple</Link>
+        </ListItem>
+        <ListItem>
+          <Link href="/formik/autofocus">Formik: AutoFocus</Link>
         </ListItem>
         <ListItem>
           <Link href="/formik/schema">Formik: Schema</Link>
@@ -38,6 +42,7 @@ export const App = () => {
       </List>
       <Routes>
         <Route path="/formik/simple" element={<Simple />} />
+        <Route path="/formik/autofocus" element={<AutoFocus />} />
         <Route path="/formik/schema" element={<Schema />} />
         <Route path="/formik/material" element={<Material />} />
         <Route path="/formik/performance" element={<Performance />} />
