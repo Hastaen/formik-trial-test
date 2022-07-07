@@ -1,5 +1,5 @@
 import React from "react";
-import { FastField, Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
@@ -13,10 +13,10 @@ interface FormValues {
 }
 
 interface FieldsValues {
-  id: string,
-  name: keyof FormValues,
-  label: string,
-  initialValue: string,
+  id: string;
+  name: keyof FormValues;
+  label: string;
+  initialValue: string;
 }
 
 const shapes: Record<keyof FormValues, any> = {
@@ -95,10 +95,7 @@ const fields = [
   ...defaultFields,
 ];
 
-const tenFields = [
-  ...defaultFields,
-  ...defaultFields,
-];
+const tenFields = [...defaultFields, ...defaultFields];
 
 const twentyFields = [
   ...defaultFields,
@@ -116,8 +113,7 @@ const thirtyFields = [
   ...defaultFields,
 ];
 
-
- export const getInitialValues = (fields: FieldsValues[]) => {
+export const getInitialValues = (fields: FieldsValues[]) => {
   return fields.reduce(
     (prev, { initialValue, name }, index) => ({
       ...prev,
@@ -138,11 +134,15 @@ export const getSchema = (fields: FieldsValues[]) => {
   return Yup.object().shape(schemaFields);
 };
 
-const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
+type DynamicFormValues = {
+  [key: string]: string;
+};
+
+const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const formik = useFormik({
+  const formik = useFormik<DynamicFormValues>({
     initialValues: getInitialValues(propFields),
     validationSchema: getSchema(propFields),
     onSubmit: (values) => {
@@ -162,29 +162,31 @@ const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
                   variant="outlined"
-                  // @ts-ignore
                   value={formik.values[`${name}-${index}`]}
-                  // @ts-ignore
-                  {...(formik.errors[`${name}-${index}`] && formik.touched[`${name}-${index}`] && {
-                    error: true,
-                    // @ts-ignore
-                    helperText: formik.errors[`${name}-${index}`]?.toString(),
-                  })}
+                  {...(formik.errors[`${name}-${index}`] &&
+                    formik.touched[`${name}-${index}`] && {
+                      error: true,
+                      helperText: formik.errors[`${name}-${index}`]?.toString(),
+                    })}
                 />
-              </Box>
-            </Grid>
-          );
-        })}
-      </Grid>
+                      )}
+                      
+                    </FastField>
+                  </Box>
+                </Grid>
+              );
+            })}
+          </Grid>
 
-      <Grid container alignItems="start" direction="row" spacing={2}>
-        <Grid item mt={2}>
-          <Button variant="contained" type="submit">
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+          <Grid container alignItems="start" direction="row" spacing={2}>
+            <Grid item mt={2}>
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>)}
+      />
   );
 };
 
@@ -255,7 +257,7 @@ const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
 const SignupForm = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const formik = useFormik({
+  const formik = useFormik<DynamicFormValues>({
     initialValues: getInitialValues(fields),
     validationSchema: getSchema(fields),
     onSubmit: (values) => {
@@ -275,14 +277,12 @@ const SignupForm = () => {
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
                   variant="outlined"
-                  // @ts-ignore
                   value={formik.values[`${name}-${index}`]}
-                  // @ts-ignore
-                  {...(formik.errors[`${name}-${index}`] &&  formik.touched[`${name}-${index}`] &&{
-                    error: true,
-                    // @ts-ignore
-                    helperText: formik.errors[`${name}-${index}`]?.toString(),
-                  })}
+                  {...(formik.errors[`${name}-${index}`] &&
+                    formik.touched[`${name}-${index}`] && {
+                      error: true,
+                      helperText: formik.errors[`${name}-${index}`]?.toString(),
+                    })}
                 />
               </Box>
             </Grid>
@@ -308,31 +308,26 @@ export const FormikTenFieldsPerformance = () => {
       <FormBuilder propFields={tenFields} />
     </div>
   );
-}
+};
 
 export const FormikTwentyFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: TwentyFieldsPerformance</header>
+      <header className="App-header">
+        Formik ADR: TwentyFieldsPerformance
+      </header>
       <FormBuilder propFields={twentyFields} />
     </div>
   );
-}
+};
 
 export const FormikThirtyFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: ThirtyFieldsPerformance</header>
+      <header className="App-header">
+        Formik ADR: ThirtyFieldsPerformance
+      </header>
       <FormBuilder propFields={thirtyFields} />
-    </div>
-  );
-}
-
-export const ThirtyFastFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">Formik ADR: ThirtyFastFieldsPerformance</header>
-      <FastFieldFormBuilder propFields={thirtyFields} />
     </div>
   );
 }
@@ -344,4 +339,4 @@ export const FormikPerformance = () => {
       <SignupForm />
     </div>
   );
-}
+};
