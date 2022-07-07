@@ -65,7 +65,7 @@ const SignupForm = () => {
             <Controller
               name="name"
               control={control}
-              render={({ field, fieldState: { error, isTouched } }) => (
+              render={({ field, fieldState: { error } }) => (
                 <TextField
                   label="Name"
                   {...field}
@@ -83,7 +83,7 @@ const SignupForm = () => {
             <Controller
               name="surname"
               control={control}
-              render={({ field, fieldState: { error, isTouched } }) => (
+              render={({ field, fieldState: { error } }) => (
                 <TextField
                   label="Surname"
                   {...field}
@@ -101,7 +101,7 @@ const SignupForm = () => {
             <Controller
               name="email"
               control={control}
-              render={({ field, fieldState: { error, isTouched } }) => (
+              render={({ field, fieldState: { error } }) => (
                 <TextField
                   label="Email Address"
                   {...field}
@@ -119,7 +119,7 @@ const SignupForm = () => {
             <Controller
               name="password"
               control={control}
-              render={({ field, fieldState: { error, isTouched } }) => (
+              render={({ field, fieldState: { error } }) => (
                 <TextField
                   label="Password"
                   type="password"
@@ -138,7 +138,7 @@ const SignupForm = () => {
             <Controller
               name="age"
               control={control}
-              render={({ field, fieldState: { error, isTouched } }) => (
+              render={({ field, fieldState: { error } }) => (
                 <TextField
                   label="Age"
                   {...field}

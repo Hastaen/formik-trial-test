@@ -1,8 +1,8 @@
-import React from "react";
-import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface FormValues {
   name: string;
@@ -13,23 +13,24 @@ interface FormValues {
 }
 
 interface FieldsValues {
-  id: string,
-  name: keyof FormValues,
-  label: string,
-  initialValue: string,
+  id: string;
+  name: keyof FormValues;
+  label: string;
+  initialValue: string;
 }
 
 const shapes: Record<keyof FormValues, any> = {
   name: Yup.string()
+    .required("Required")
     .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .max(50, "Too Long!"),
   surname: Yup.string()
+    .required("Required")
     .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+    .max(50, "Too Long!"),
+  email: Yup.string().required("Required").email("Invalid email"),
   password: Yup.string()
+    .required("Required")
     .min(10, "Too Short!")
     .max(30, "Too Long!")
     .matches(/\d+/, { message: "Password no number" })
@@ -37,14 +38,13 @@ const shapes: Record<keyof FormValues, any> = {
     .matches(/[A-Z]+/, { message: "Password no uppercase" })
     .matches(/[!@#$%^&*()-+]+/, {
       message: "Password no special char",
-    })
-    .required("Required"),
+    }),
   age: Yup.number()
+    .required("Required")
     .positive()
     .integer()
     .min(10, "Too yound!")
-    .max(100, "Too old!")
-    .required("Required"),
+    .max(100, "Too old!"),
 };
 
 const defaultFields: FieldsValues[] = [
@@ -95,10 +95,7 @@ const fields = [
   ...defaultFields,
 ];
 
-const tenFields = [
-  ...defaultFields,
-  ...defaultFields,
-];
+const tenFields = [...defaultFields, ...defaultFields];
 
 const twentyFields = [
   ...defaultFields,
@@ -116,8 +113,7 @@ const thirtyFields = [
   ...defaultFields,
 ];
 
-
- export const getInitialValues = (fields: FieldsValues[]) => {
+export const getInitialValues = (fields: FieldsValues[]) => {
   return fields.reduce(
     (prev, { initialValue, name }, index) => ({
       ...prev,
@@ -138,38 +134,43 @@ export const getSchema = (fields: FieldsValues[]) => {
   return Yup.object().shape(schemaFields);
 };
 
-const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
+type DynamicFormValues = {
+  [key: string]: string;
+};
+
+const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: getInitialValues(propFields),
-    validationSchema: getSchema(propFields),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+
+  const { control, handleSubmit } = useForm<DynamicFormValues>({
+    defaultValues: getInitialValues(propFields),
+    resolver: yupResolver(getSchema(propFields)),
   });
+
+  const onSubmit = (values: DynamicFormValues) => {
+    alert(JSON.stringify(values, null, 2));
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container alignItems="start" direction="row" spacing={2}>
         {propFields.map(({ name, id, label }, index) => {
           return (
             <Grid key={`field-${index}`} item xs={6} sm={4} md={3}>
               <Box display="flex" alignItems="start" flexDirection="column">
-                <TextField
-                  id={`${id}-${index}`}
+                <Controller
                   name={`${name}-${index}`}
-                  label={`${label}-${index}`}
-                  onChange={formik.handleChange}
-                  variant="outlined"
-                  // @ts-ignore
-                  value={formik.values[`${name}-${index}`]}
-                  // @ts-ignore
-                  {...(formik.errors[`${name}-${index}`] && formik.touched[`${name}-${index}`] && {
-                    error: true,
-                    // @ts-ignore
-                    helperText: formik.errors[`${name}-${index}`]?.toString(),
-                  })}
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <TextField
+                      variant="outlined"
+                      label={`${label}-${index}`}
+                      {...field}
+                      {...(error && {
+                        error: true,
+                        helperText: error.message,
+                      })}
+                    />
+                  )}
                 />
               </Box>
             </Grid>
@@ -188,38 +189,37 @@ const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
   );
 };
 
-
 const SignupForm = () => {
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: getInitialValues(fields),
-    validationSchema: getSchema(fields),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+  const { control, handleSubmit } = useForm<DynamicFormValues>({
+    defaultValues: getInitialValues(fields),
+    resolver: yupResolver(getSchema(fields)),
   });
+
+  const onSubmit = (values: DynamicFormValues) => {
+    alert(JSON.stringify(values, null, 2));
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container alignItems="start" direction="row" spacing={2}>
         {fields.map(({ name, id, label }, index) => {
           return (
             <Grid key={`field-${index}`} item xs={6} sm={4} md={3}>
               <Box display="flex" alignItems="start" flexDirection="column">
-                <TextField
-                  id={`${id}-${index}`}
+              <Controller
                   name={`${name}-${index}`}
-                  label={`${label}-${index}`}
-                  onChange={formik.handleChange}
-                  variant="outlined"
-                  // @ts-ignore
-                  value={formik.values[`${name}-${index}`]}
-                  // @ts-ignore
-                  {...(formik.errors[`${name}-${index}`] &&  formik.touched[`${name}-${index}`] &&{
-                    error: true,
-                    // @ts-ignore
-                    helperText: formik.errors[`${name}-${index}`]?.toString(),
-                  })}
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <TextField
+                      variant="outlined"
+                      label={`${label}-${index}`}
+                      {...field}
+                      {...(error && {
+                        error: true,
+                        helperText: error.message,
+                      })}
+                    />
+                  )}
                 />
               </Box>
             </Grid>
@@ -245,7 +245,7 @@ export const RHFTenFieldsPerformance = () => {
       <FormBuilder propFields={tenFields} />
     </div>
   );
-}
+};
 
 export const RHFTwentyFieldsPerformance = () => {
   return (
@@ -254,7 +254,7 @@ export const RHFTwentyFieldsPerformance = () => {
       <FormBuilder propFields={twentyFields} />
     </div>
   );
-}
+};
 
 export const RHFThirtyFieldsPerformance = () => {
   return (
@@ -263,7 +263,7 @@ export const RHFThirtyFieldsPerformance = () => {
       <FormBuilder propFields={thirtyFields} />
     </div>
   );
-}
+};
 
 export const RHFPerformance = () => {
   return (
@@ -272,4 +272,4 @@ export const RHFPerformance = () => {
       <SignupForm />
     </div>
   );
-}
+};
