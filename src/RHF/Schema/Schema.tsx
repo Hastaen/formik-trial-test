@@ -38,7 +38,7 @@ type FormValues = {
   name: string;
   surname: string;
   password: string;
-  age: string;
+  age?: string;
 };
 
 const SignupForm = () => {
@@ -52,7 +52,7 @@ const SignupForm = () => {
       name: "",
       surname: "",
       password: "",
-      age: "",
+      age: undefined,
     },
     resolver: yupResolver(SignupSchema),
   });
