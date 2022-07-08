@@ -15,8 +15,9 @@ interface FormValues {
 interface FieldsValues {
   id: string;
   name: keyof FormValues;
+  type?: "text" | "password";
   label: string;
-  initialValue: string;
+  initialValue?: string;
 }
 
 const shapes: Record<keyof FormValues, any> = {
@@ -71,12 +72,12 @@ const defaultFields: FieldsValues[] = [
     name: "password",
     label: "Password",
     initialValue: "",
+    type: "password",
   },
   {
     id: "age",
     name: "age",
     label: "Age",
-    initialValue: "",
   },
 ];
 
@@ -153,7 +154,7 @@ const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container alignItems="start" direction="row" spacing={2}>
-        {propFields.map(({ name, id, label }, index) => {
+        {propFields.map(({ name, label, type }, index) => {
           return (
             <Grid key={`field-${index}`} item xs={6} sm={4} md={3}>
               <Box display="flex" alignItems="start" flexDirection="column">
@@ -162,9 +163,10 @@ const FormBuilder = (props: { propFields: FieldsValues[] }) => {
                   control={control}
                   render={({ field, fieldState: { error } }) => (
                     <TextField
+                      {...field}
                       variant="outlined"
                       label={`${label}-${index}`}
-                      {...field}
+                      {...(type && { type })}
                       {...(error && {
                         error: true,
                         helperText: error.message,
@@ -206,7 +208,7 @@ const SignupForm = () => {
           return (
             <Grid key={`field-${index}`} item xs={6} sm={4} md={3}>
               <Box display="flex" alignItems="start" flexDirection="column">
-              <Controller
+                <Controller
                   name={`${name}-${index}`}
                   control={control}
                   render={({ field, fieldState: { error } }) => (
