@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Material from "./Formik/Material/Material";
 import Schema from "./Formik/Schema/Schema";
 import Simple from "./Formik/Simple/Simple";
-import {Performance, TenFieldsPerformance, TwentyFieldsPerformance, ThirtyFieldsPerformance} from "./Formik/Performance/Performance";
+import { Performance, TenFieldsPerformance, TwentyFieldsPerformance, ThirtyFieldsPerformance, ThirtyFastFieldsPerformance } from './Formik/Performance/Performance';
 import FormikComponents from "./Formik/FormikComponents/FormikComponents";
 import "./App.css";
 import { List, ListItem, Link } from "@mui/material";
@@ -37,6 +37,9 @@ export const App = () => {
           <Link href="/formik/thirtyfieldperformance">Formik: 30 fields Performance</Link>
         </ListItem>
         <ListItem>
+          <Link href="/formik/thirtyfastfieldsperformance">Formik: 30 fastfields Performance</Link>
+        </ListItem>
+        <ListItem>
           <Link href="/formik/FormikComponents">Formik: FormikComponents</Link>
         </ListItem>
       </List>
@@ -49,6 +52,7 @@ export const App = () => {
         <Route path="/formik/tenfieldperformance" element={<TenFieldsPerformance />} />
         <Route path="/formik/tweentyfieldperformance" element={<TwentyFieldsPerformance />} />
         <Route path="/formik/thirtyfieldperformance" element={<ThirtyFieldsPerformance />} />
+        <Route path="/formik/thirtyfastfieldsperformance" element={<ThirtyFastFieldsPerformance />} />
         <Route path="/formik/FormikComponents" element={<FormikComponents />} />
       </Routes>
     </BrowserRouter>
