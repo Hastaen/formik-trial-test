@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Material from "./Formik/Material/Material";
 import Schema from "./Formik/Schema/Schema";
 import Simple from "./Formik/Simple/Simple";
-import {Performance, TenFieldsPerformance, TwentyFieldsPerformance, ThirtyFieldsPerformance} from "./Formik/Performance/Performance";
+import { SimpleFinalForm } from "./FinalForm/Simple/Simple";
+import { Performance, TenFieldsPerformance, TwentyFieldsPerformance, ThirtyFieldsPerformance, ThirtyFastFieldsPerformance } from './Formik/Performance/Performance';
 import FormikComponents from "./Formik/FormikComponents/FormikComponents";
 import "./App.css";
 import { List, ListItem, Link } from "@mui/material";
@@ -14,6 +15,9 @@ export const App = () => {
       <List>
         <ListItem>
           <Link href="/formik/simple">Formik: Simple</Link>
+        </ListItem>
+          <ListItem>
+        <Link href="/finalform/simple">FinalForm: Simple</Link>
         </ListItem>
         <ListItem>
           <Link href="/formik/autofocus">Formik: AutoFocus</Link>
@@ -42,6 +46,7 @@ export const App = () => {
       </List>
       <Routes>
         <Route path="/formik/simple" element={<Simple />} />
+        <Route path="/finalform/simple" element={<SimpleFinalForm />} />
         <Route path="/formik/autofocus" element={<AutoFocus />} />
         <Route path="/formik/schema" element={<Schema />} />
         <Route path="/formik/material" element={<Material />} />
