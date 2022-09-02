@@ -41,6 +41,9 @@ export const App = () => {
           <Link href="/formik/thirtyfieldperformance">Formik: 30 fields Performance</Link>
         </ListItem>
         <ListItem>
+          <Link href="/formik/thirtyfastfieldsperformance">Formik: 30 fastfields Performance</Link>
+        </ListItem>
+        <ListItem>
           <Link href="/formik/FormikComponents">Formik: FormikComponents</Link>
         </ListItem>
       </List>
@@ -54,6 +57,7 @@ export const App = () => {
         <Route path="/formik/tenfieldperformance" element={<TenFieldsPerformance />} />
         <Route path="/formik/tweentyfieldperformance" element={<TwentyFieldsPerformance />} />
         <Route path="/formik/thirtyfieldperformance" element={<ThirtyFieldsPerformance />} />
+        <Route path="/formik/thirtyfastfieldsperformance" element={<ThirtyFastFieldsPerformance />} />
         <Route path="/formik/FormikComponents" element={<FormikComponents />} />
       </Routes>
     </BrowserRouter>
