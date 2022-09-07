@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormik } from "formik";
+import { FastField, Formik, useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import * as Yup from "yup";
@@ -138,7 +138,7 @@ type DynamicFormValues = {
   [key: string]: string;
 };
 
-const FormBuilder = (props: { propFields: FieldsValues[] }) => {
+const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
   const { propFields } = props;
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
@@ -163,44 +163,30 @@ const FormBuilder = (props: { propFields: FieldsValues[] }) => {
                   onChange={formik.handleChange}
                   variant="outlined"
                   value={formik.values[`${name}-${index}`]}
-                  {...(formik.errors[`${name}-${index}`] &&
-                    formik.touched[`${name}-${index}`] && {
-                      error: true,
-                      helperText: formik.errors[`${name}-${index}`]?.toString(),
-                    })}
+                  {...(formik.errors[`${name}-${index}`] && formik.touched[`${name}-${index}`] && {
+                    error: true,
+                    helperText: formik.errors[`${name}-${index}`]?.toString(),
+                  })}
                 />
-                      )}
-                      
-                    </FastField>
-                  </Box>
-                </Grid>
-              );
-            })}
-          </Grid>
-
-          <Grid container alignItems="start" direction="row" spacing={2}>
-            <Grid item mt={2}>
-              <Button variant="contained" type="submit">
-                Submit
-              </Button>
+              </Box>
             </Grid>
-          </Grid>
-        </form>)}
-      />
+          );
+        })}
+      </Grid>
+
+      <Grid container alignItems="start" direction="row" spacing={2}>
+        <Grid item mt={2}>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
   );
 };
 
 const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: getInitialValues(propFields),
-    validationSchema: getSchema(propFields),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
   return (
     <Formik
       initialValues={getInitialValues(propFields)}
@@ -328,6 +314,15 @@ export const FormikThirtyFieldsPerformance = () => {
         Formik ADR: ThirtyFieldsPerformance
       </header>
       <FormBuilder propFields={thirtyFields} />
+    </div>
+  );
+}
+
+export const FormikThirtyFastFieldsPerformance = () => {
+  return (
+    <div className="App">
+      <header className="App-header">Formik ADR: ThirtyFastFieldsPerformance</header>
+      <FastFieldFormBuilder propFields={thirtyFields} />
     </div>
   );
 }

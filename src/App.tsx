@@ -10,6 +10,8 @@ import {
   FormikThirtyFieldsPerformance,
   FormikTwentyFieldsPerformance,
   FormikPerformance,
+  FormikAutoFocus,
+  FormikThirtyFastFieldsPerformance,
 } from "./Formik";
 import {
   RHFMaterial,
@@ -20,6 +22,7 @@ import {
   RHFTwentyFieldsPerformance,
   RHFPerformance,
 } from "./RHF";
+import { FinalFormSimple } from "./FinalForm";
 
 export const App = () => {
   return (
@@ -44,26 +47,76 @@ export const App = () => {
               <Link href="/formik/performance">Formik: Performance</Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/tenfieldperformance">Formik: 10 field Performance</Link>
+              <Link href="/formik/tenfieldperformance">
+                Formik: 10 field Performance
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/tweentyfieldperformance">Formik: 20 fields Performance</Link>
+              <Link href="/formik/tweentyfieldperformance">
+                Formik: 20 fields Performance
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/thirtyfieldperformance">Formik: 30 fields Performance</Link>
+              <Link href="/formik/thirtyfieldperformance">
+                Formik: 30 fields Performance
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/thirtyfastfieldsperformance">Formik: 30 fastfields Performance</Link>
+              <Link href="/formik/thirtyfastfieldsperformance">
+                Formik: 30 fastfields Performance
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/FormikComponents">Formik: FormikComponents</Link>
+              <Link href="/formik/FormikComponents">
+                Formik: FormikComponents
+              </Link>
+            </ListItem>
+          </List>
+        </Grid>
+        <Grid item xs={3} sm={3} md={3}>
+          React Hook Form examples
+          <List>
+            <ListItem>
+              <Link href="/rhf/simple">RHF: Simple</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/schema">RHF: Schema</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/material">RHF: Material</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/performance">RHF: Performance</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/tenfieldperformance">
+                RHF: 10 field Performance
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/tweentyfieldperformance">
+                RHF: 20 fields Performance
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/thirtyfieldperformance">
+                RHF: 30 fields Performance
+              </Link>
+            </ListItem>
+          </List>
+        </Grid>
+        <Grid item xs={3} sm={3} md={3}>
+          React Final Form examples
+          <List>
+            <ListItem>
+              <Link href="/finalform/simple">Final Form: Simple</Link>
             </ListItem>
           </List>
         </Grid>
       </Grid>
       <Routes>
         <Route path="/formik/simple" element={<FormikSimple />} />
-        <Route path="/formik/autofocus" element={<AutoFocus />} />
+        <Route path="/formik/autofocus" element={<FormikAutoFocus />} />
         <Route path="/formik/schema" element={<FormikSchema />} />
         <Route path="/formik/material" element={<FormikMaterial />} />
         <Route path="/formik/performance" element={<FormikPerformance />} />
@@ -81,7 +134,7 @@ export const App = () => {
         />
         <Route
           path="/formik/thirtyfastfieldsperformance"
-          element={<ThirtyFastFieldsPerformance />}
+          element={<FormikThirtyFastFieldsPerformance />}
         />
         <Route path="/formik/components" element={<FormikComponents />} />
         <Route path="/rhf/simple" element={<RHFSimple />} />
@@ -103,6 +156,10 @@ export const App = () => {
         <Route
           path="/rhf/thirtyfieldperformance"
           element={<RHFThirtyFieldsPerformance />}
+        />
+        <Route
+          path="/finalform/simple"
+          element={<FinalFormSimple />}
         />
       </Routes>
     </BrowserRouter>
