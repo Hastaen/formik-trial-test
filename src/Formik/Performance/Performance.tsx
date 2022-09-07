@@ -13,10 +13,10 @@ interface FormValues {
 }
 
 interface FieldsValues {
-  id: string,
-  name: keyof FormValues,
-  label: string,
-  initialValue: string,
+  id: string;
+  name: keyof FormValues;
+  label: string;
+  initialValue: string;
 }
 
 const shapes: Record<keyof FormValues, any> = {
@@ -95,10 +95,7 @@ const fields = [
   ...defaultFields,
 ];
 
-const tenFields = [
-  ...defaultFields,
-  ...defaultFields,
-];
+const tenFields = [...defaultFields, ...defaultFields];
 
 const twentyFields = [
   ...defaultFields,
@@ -116,8 +113,7 @@ const thirtyFields = [
   ...defaultFields,
 ];
 
-
- export const getInitialValues = (fields: FieldsValues[]) => {
+export const getInitialValues = (fields: FieldsValues[]) => {
   return fields.reduce(
     (prev, { initialValue, name }, index) => ({
       ...prev,
@@ -138,11 +134,15 @@ export const getSchema = (fields: FieldsValues[]) => {
   return Yup.object().shape(schemaFields);
 };
 
+type DynamicFormValues = {
+  [key: string]: string;
+};
+
 const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
   const { propFields } = props;
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const formik = useFormik({
+  const formik = useFormik<DynamicFormValues>({
     initialValues: getInitialValues(propFields),
     validationSchema: getSchema(propFields),
     onSubmit: (values) => {
@@ -162,12 +162,9 @@ const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
                   variant="outlined"
-                  // @ts-ignore
                   value={formik.values[`${name}-${index}`]}
-                  // @ts-ignore
                   {...(formik.errors[`${name}-${index}`] && formik.touched[`${name}-${index}`] && {
                     error: true,
-                    // @ts-ignore
                     helperText: formik.errors[`${name}-${index}`]?.toString(),
                   })}
                 />
@@ -190,15 +187,6 @@ const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
 
 const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: getInitialValues(propFields),
-    validationSchema: getSchema(propFields),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
   return (
     <Formik
       initialValues={getInitialValues(propFields)}
@@ -255,7 +243,7 @@ const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
 const SignupForm = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const formik = useFormik({
+  const formik = useFormik<DynamicFormValues>({
     initialValues: getInitialValues(fields),
     validationSchema: getSchema(fields),
     onSubmit: (values) => {
@@ -275,14 +263,12 @@ const SignupForm = () => {
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
                   variant="outlined"
-                  // @ts-ignore
                   value={formik.values[`${name}-${index}`]}
-                  // @ts-ignore
-                  {...(formik.errors[`${name}-${index}`] &&  formik.touched[`${name}-${index}`] &&{
-                    error: true,
-                    // @ts-ignore
-                    helperText: formik.errors[`${name}-${index}`]?.toString(),
-                  })}
+                  {...(formik.errors[`${name}-${index}`] &&
+                    formik.touched[`${name}-${index}`] && {
+                      error: true,
+                      helperText: formik.errors[`${name}-${index}`]?.toString(),
+                    })}
                 />
               </Box>
             </Grid>
@@ -301,34 +287,38 @@ const SignupForm = () => {
   );
 };
 
-export const TenFieldsPerformance = () => {
+export const FormikTenFieldsPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: TenFieldsPerformance</header>
       <FormBuilder propFields={tenFields} />
     </div>
   );
-}
+};
 
-export const TwentyFieldsPerformance = () => {
+export const FormikTwentyFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: TwentyFieldsPerformance</header>
+      <header className="App-header">
+        Formik ADR: TwentyFieldsPerformance
+      </header>
       <FormBuilder propFields={twentyFields} />
     </div>
   );
-}
+};
 
-export const ThirtyFieldsPerformance = () => {
+export const FormikThirtyFieldsPerformance = () => {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: ThirtyFieldsPerformance</header>
+      <header className="App-header">
+        Formik ADR: ThirtyFieldsPerformance
+      </header>
       <FormBuilder propFields={thirtyFields} />
     </div>
   );
 }
 
-export const ThirtyFastFieldsPerformance = () => {
+export const FormikThirtyFastFieldsPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: ThirtyFastFieldsPerformance</header>
@@ -337,11 +327,11 @@ export const ThirtyFastFieldsPerformance = () => {
   );
 }
 
-export const Performance = () => {
+export const FormikPerformance = () => {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Performance</header>
       <SignupForm />
     </div>
   );
-}
+};

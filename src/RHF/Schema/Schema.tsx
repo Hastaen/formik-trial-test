@@ -1,8 +1,9 @@
 import React from "react";
-import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid } from "@mui/material";
 import * as Yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -32,88 +33,80 @@ const SignupSchema = Yup.object().shape({
     .required("Required"),
 });
 
+type FormValues = {
+  email: string;
+  name: string;
+  surname: string;
+  password: string;
+  age?: string;
+};
+
 const SignupForm = () => {
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields },
+  } = useForm<FormValues>({
+    defaultValues: {
       email: "",
       name: "",
       surname: "",
       password: "",
-      age: "",
+      age: undefined,
     },
-    validationSchema: SignupSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    resolver: yupResolver(SignupSchema),
   });
+
+  const onSubmit = (values: FormValues) => {
+    alert(JSON.stringify(values, null, 2));
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container alignItems="start" direction="column">
         <Grid item>
           <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
             <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.name}
-            />
-            {formik.errors.name && formik.touched.name && <span>{formik.errors.name}</span>}
+            <input id="name" {...register("name")} />
+            {errors.name?.message && touchedFields.name && (
+              <span>{errors.name?.message}</span>
+            )}
           </Box>
         </Grid>
         <Grid item>
           <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
             <label htmlFor="surname">Surname</label>
-            <input
-              id="surname"
-              name="surname"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.surname}
-            />
-            {formik.errors.surname && formik.touched.surname && <span>{formik.errors.surname}</span>}
+            <input id="surname" {...register("surname")} />
+            {errors.surname?.message && touchedFields.surname && (
+              <span>{errors.surname?.message}</span>
+            )}
           </Box>
         </Grid>
         <Grid item>
           <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
             <label htmlFor="email">Email Address</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-            />
-            {formik.errors.email && formik.touched.email && <span>{formik.errors.email}</span>}
+            <input id="email" type="email" {...register("email")} />
+            {errors.email?.message && touchedFields.email && (
+              <span>{errors.email?.message}</span>
+            )}
           </Box>
         </Grid>
         <Grid item>
           <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
             <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-            />
-            {formik.errors.password && formik.touched.password && <span>{formik.errors.password}</span>}
+            <input id="password" type="password" {...register("password")} />
+            {errors.password?.message && touchedFields.password && (
+              <span>{errors.password?.message}</span>
+            )}
           </Box>
         </Grid>
         <Grid item>
           <Box display="flex" alignItems="start" flexDirection="column" mb={2}>
             <label htmlFor="age">Age</label>
-            <input
-              id="age"
-              name="age"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.age}
-            />
-            {formik.errors.age && formik.touched.age && <span>{formik.errors.age}</span>}
+            <input id="age" {...register("age")} />
+            {errors.age?.message && touchedFields.age && (
+              <span>{errors.age?.message}</span>
+            )}
           </Box>
         </Grid>
 
@@ -125,13 +118,13 @@ const SignupForm = () => {
   );
 };
 
-function FormikSchema() {
+function RHFSchema() {
   return (
     <div className="App">
-      <header className="App-header">Formik ADR: Schema</header>
+      <header className="App-header">RHF ADR: Schema</header>
       <SignupForm />
     </div>
   );
 }
 
-export default FormikSchema;
+export default RHFSchema;

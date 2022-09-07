@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 
-const SignupForm = () => {
+const AutoFocusForm = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
@@ -17,6 +22,7 @@ const SignupForm = () => {
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="email">Email Address</label>
       <input
+        ref={inputRef}
         id="email"
         name="email"
         type="email"
@@ -29,13 +35,13 @@ const SignupForm = () => {
   );
 };
 
-function FormikSimple() {
+function AutoFocus() {
   return (
     <div className="App">
       <header className="App-header">Formik ADR: Simple</header>
-      <SignupForm />
+      <AutoFocusForm />
     </div>
   );
 }
 
-export default FormikSimple;
+export default AutoFocus;
