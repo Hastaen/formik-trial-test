@@ -22,7 +22,7 @@ import {
   RHFTwentyFieldsPerformance,
   RHFPerformance,
 } from "./RHF";
-import { FinalFormSimple } from "./FinalForm";
+import { FinalFormAutofocus, FinalFormSimple } from "./FinalForm";
 
 export const App = () => {
   return (
@@ -111,6 +111,9 @@ export const App = () => {
             <ListItem>
               <Link href="/finalform/simple">Final Form: Simple</Link>
             </ListItem>
+            <ListItem>
+              <Link href="/finalform/autofocus">Final Form: Autofocus</Link>
+            </ListItem>
           </List>
         </Grid>
       </Grid>
@@ -160,6 +163,10 @@ export const App = () => {
         <Route
           path="/finalform/simple"
           element={<FinalFormSimple />}
+        />
+        <Route
+          path="/finalform/autofocus"
+          element={<FinalFormAutofocus />}
         />
       </Routes>
     </BrowserRouter>
