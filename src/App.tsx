@@ -22,7 +22,15 @@ import {
   RHFTwentyFieldsPerformance,
   RHFPerformance,
 } from "./RHF";
-import { FinalFormAutofocus, FinalFormSimple } from "./FinalForm";
+import {
+  FinalFormPerformance,
+  FinalFormAutofocus,
+  FinalFormSchema,
+  FinalFormSimple,
+  FinalFormTenFieldsPerformance,
+  FinalFormThirtyFieldsPerformance,
+  FinalFormTwentyFieldsPerformance,
+} from "./FinalForm";
 
 export const App = () => {
   return (
@@ -114,6 +122,27 @@ export const App = () => {
             <ListItem>
               <Link href="/finalform/autofocus">Final Form: Autofocus</Link>
             </ListItem>
+            <ListItem>
+              <Link href="/finalform/schema">Final Form: Schema</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/finalform/performance">Final Form: Performance</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/finalform/tenfieldperformance">
+                Final Form: 10 field Performance
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/finalform/tweentyfieldperformance">
+                Final Form: 20 fields Performance
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/finalform/thirtyfieldperformance">
+                Final Form: 30 fields Performance
+              </Link>
+            </ListItem>
           </List>
         </Grid>
       </Grid>
@@ -160,13 +189,25 @@ export const App = () => {
           path="/rhf/thirtyfieldperformance"
           element={<RHFThirtyFieldsPerformance />}
         />
+        <Route path="/finalform/simple" element={<FinalFormSimple />} />
+        <Route path="/finalform/autofocus" element={<FinalFormAutofocus />} />
+        <Route path="/finalform/schema" element={<FinalFormSchema />} />
+        <Route path="/finalform/performance" element={<FinalFormPerformance />} />
         <Route
-          path="/finalform/simple"
-          element={<FinalFormSimple />}
+          path="/finalform/tenfieldperformance"
+          element={<FinalFormTenFieldsPerformance />}
         />
         <Route
-          path="/finalform/autofocus"
-          element={<FinalFormAutofocus />}
+          path="/finalform/tweentyfieldperformance"
+          element={<FinalFormTwentyFieldsPerformance />}
+        />
+        <Route
+          path="/finalform/thirtyfieldperformance"
+          element={<FinalFormThirtyFieldsPerformance />}
+        />
+        <Route
+          path="/finalform/thirtyfieldperformance"
+          element={<FinalFormThirtyFieldsPerformance />}
         />
       </Routes>
     </BrowserRouter>
