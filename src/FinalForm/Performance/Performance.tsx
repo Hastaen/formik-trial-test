@@ -141,15 +141,12 @@ type DynamicFormValues = {
 export const validate =
   (fields: FieldsValues[]) => async (values: DynamicFormValues) => {
     const SignupSchema = getSchema(fields);
-    console.log("schema", SignupSchema);
     try {
       await SignupSchema.validate(values, { abortEarly: false });
-      console.log("???");
     } catch (err: any) {
       const errors = err.inner.reduce((formError: any, innerError: any) => {
         return setIn(formError, innerError.path, innerError.message);
       }, {});
-      console.log("errors", errors);
 
       return errors;
     }
@@ -168,7 +165,6 @@ const FormBuilder = (props: { propFields: FieldsValues[] }) => {
       initialValues={initialValues}
       render={({ handleSubmit, form, submitting, pristine, values }) => {
         const { errors, touched } = form.getState();
-        console.log('?', errors, touched);
         return (
           <form onSubmit={handleSubmit}>
             <Grid container alignItems="start" direction="row" spacing={2}>
@@ -184,11 +180,9 @@ const FormBuilder = (props: { propFields: FieldsValues[] }) => {
                         id={`${id}-${index}`}
                         name={`${name}-${index}`}
                       >
-                        {({ input }) => {
-                          const { name, value, onChange } = input;
+                        {({ input: { name, value, onChange } }) => {
                           const error = errors?.[name];
                           const touch = touched?.[name];
-                          console.log('!', input);
                           return (
                             <TextField
                               id={`${id}-${index}`}
