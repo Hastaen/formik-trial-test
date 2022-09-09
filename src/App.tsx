@@ -23,6 +23,7 @@ import {
   RHFPerformance,
 } from "./RHF";
 import {
+  FinalFormMaterial,
   FinalFormPerformance,
   FinalFormAutofocus,
   FinalFormSchema,
@@ -126,6 +127,9 @@ export const App = () => {
               <Link href="/finalform/schema">Final Form: Schema</Link>
             </ListItem>
             <ListItem>
+              <Link href="/finalform/material">Final Form: Material</Link>
+            </ListItem>
+            <ListItem>
               <Link href="/finalform/performance">Final Form: Performance</Link>
             </ListItem>
             <ListItem>
@@ -192,7 +196,11 @@ export const App = () => {
         <Route path="/finalform/simple" element={<FinalFormSimple />} />
         <Route path="/finalform/autofocus" element={<FinalFormAutofocus />} />
         <Route path="/finalform/schema" element={<FinalFormSchema />} />
-        <Route path="/finalform/performance" element={<FinalFormPerformance />} />
+        <Route path="/finalform/material" element={<FinalFormMaterial />} />
+        <Route
+          path="/finalform/performance"
+          element={<FinalFormPerformance />}
+        />
         <Route
           path="/finalform/tenfieldperformance"
           element={<FinalFormTenFieldsPerformance />}
