@@ -20,7 +20,7 @@ const onSubmit = async (values: Values) => {
   window.alert(JSON.stringify(values, undefined, 2));
 };
 
-const SimpleFinalForm: React.FC = () => (
+const SignupForm: React.FC = () => (
   <Form
     onSubmit={onSubmit}
     initialValues={{ firstName: "", lastName: "" }}
@@ -53,5 +53,16 @@ const SimpleFinalForm: React.FC = () => (
     )}
   />
 );
+
+
+function SimpleFinalForm() {
+  return (
+    <div className="App">
+      <header className="App-header">Final Form ADR: Simple</header>
+      <SignupForm />
+    </div>
+  );
+}
+
 
 export default SimpleFinalForm;

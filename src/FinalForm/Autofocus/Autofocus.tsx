@@ -20,7 +20,7 @@ const onSubmit = async (values: Values) => {
   window.alert(JSON.stringify(values, undefined, 2));
 };
 
-const AutoFocusForm: React.FC = () =>  (
+const SignupForm: React.FC = () =>  (
  
  <Form
     onSubmit={onSubmit}
@@ -55,5 +55,15 @@ const AutoFocusForm: React.FC = () =>  (
     )}
   />
 );
+
+
+function AutoFocusForm() {
+  return (
+    <div className="App">
+      <header className="App-header">Final Form ADR: AutoFocus</header>
+      <SignupForm />
+    </div>
+  );
+}
 
 export default AutoFocusForm;
