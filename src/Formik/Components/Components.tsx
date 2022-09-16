@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, FormikProps, FieldProps } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
-import * as Yup from "yup";
+import { SignupSchema } from "../../utils/schema";
 
 interface FormValues {
   name: string;
@@ -11,34 +11,6 @@ interface FormValues {
   password: string;
   age: string;
 }
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  surname: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .min(10, "Too Short!")
-    .max(30, "Too Long!")
-    .matches(/\d+/, { message: "Password no number" })
-    .matches(/[a-z]+/, { message: "Password no lowercase" })
-    .matches(/[A-Z]+/, { message: "Password no uppercase" })
-    .matches(/[!@#$%^&*()-+]+/, {
-      message: "Password no special char",
-    })
-    .required("Required"),
-  age: Yup.number()
-    .positive()
-    .integer()
-    .min(10, "Too yound!")
-    .max(100, "Too old!")
-    .required("Required"),
-});
 
 const SignupForm = () => {
   return (
