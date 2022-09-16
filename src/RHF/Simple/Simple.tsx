@@ -1,19 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
+import { SimpleFormValues } from "../../types/types";
 
-type FormValues = {
-  email: string;
-};
 
 const SignupForm = () => {
-  const { register, handleSubmit } = useForm<FormValues>({
+  const { register, handleSubmit } = useForm<SimpleFormValues>({
     defaultValues: {
       email: "",
     },
   });
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: SimpleFormValues) => {
     alert(JSON.stringify(values, null, 2));
   };
 

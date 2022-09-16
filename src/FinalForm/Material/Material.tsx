@@ -4,6 +4,7 @@ import { Box, Grid, TextField } from "@mui/material";
 import { Field, Form } from "react-final-form";
 import { setIn } from "final-form";
 import { SignupSchema } from "../../utils/schema";
+import { FormValues } from "../../types/types";
 
 export const validate = async (values: FormValues) => {
   try {
@@ -17,13 +18,6 @@ export const validate = async (values: FormValues) => {
   }
 };
 
-type FormValues = {
-  email: string;
-  name: string;
-  surname: string;
-  password: string;
-  age?: string;
-};
 
 const SignupForm = () => {
   const initialValues: FormValues = {

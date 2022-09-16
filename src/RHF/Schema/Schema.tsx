@@ -4,14 +4,7 @@ import { Box, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignupSchema } from "../../utils/schema";
-
-type FormValues = {
-  email: string;
-  name: string;
-  surname: string;
-  password: string;
-  age?: string;
-};
+import { FormValues } from "../../types/types";
 
 const SignupForm = () => {
   const {

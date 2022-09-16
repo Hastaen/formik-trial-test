@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
+import { SimpleFormValues } from "../../types/types";
 
-type FormValues = {
-  email: string;
-};
 
 const SignupForm = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -13,7 +11,7 @@ const SignupForm = () => {
     inputRef.current?.focus();
   }, []);
 
-  const { register, handleSubmit } = useForm<FormValues>({
+  const { register, handleSubmit } = useForm<SimpleFormValues>({
     defaultValues: {
       email: "",
     },
@@ -21,7 +19,7 @@ const SignupForm = () => {
 
   const { ref, ...rest } = register('email');
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = (values: SimpleFormValues) => {
     alert(JSON.stringify(values, null, 2));
   };
 
