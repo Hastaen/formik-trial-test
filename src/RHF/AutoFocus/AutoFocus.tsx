@@ -7,7 +7,7 @@ type FormValues = {
 };
 
 const SignupForm = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -19,6 +19,8 @@ const SignupForm = () => {
     },
   });
 
+  const { ref, ...rest } = register('email');
+
   const onSubmit = (values: FormValues) => {
     alert(JSON.stringify(values, null, 2));
   };
@@ -26,7 +28,10 @@ const SignupForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="email">Email Address</label>
-      <input  id="email" type="email" {...register("email")} ref={inputRef}/>
+      <input  id="email" type="email" {...rest} ref={(e) => {
+        ref(e)
+        inputRef.current = e
+      }}/>
 
       <Button type="submit">Submit</Button>
     </form>
