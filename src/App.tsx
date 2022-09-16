@@ -77,7 +77,7 @@ export const App = () => {
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/FormikComponents">
+              <Link href="/formik/components">
                 Formik: FormikComponents
               </Link>
             </ListItem>
