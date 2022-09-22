@@ -3,11 +3,11 @@ import { FastField, Formik, useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
 import { DynamicFormValues, FieldsValues } from "../../types/types";
-import { fields, getInitialValues, tenFields, thirtyFields, twentyFields } from '../../utils/fields';
+import { fields, getInitialValues } from '../../utils/fields';
 import { getSchema } from "../../utils/schema";
 
 
-const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
+export const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
   const { propFields } = props;
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
@@ -54,7 +54,7 @@ const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
   );
 };
 
-const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
+export const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
   return (
     <Formik
@@ -155,46 +155,6 @@ const SignupForm = () => {
     </form>
   );
 };
-
-export const FormikTenFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">Formik ADR: TenFieldsPerformance</header>
-      <FormBuilder propFields={tenFields} />
-    </div>
-  );
-};
-
-export const FormikTwentyFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Formik ADR: TwentyFieldsPerformance
-      </header>
-      <FormBuilder propFields={twentyFields} />
-    </div>
-  );
-};
-
-export const FormikThirtyFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Formik ADR: ThirtyFieldsPerformance
-      </header>
-      <FormBuilder propFields={thirtyFields} />
-    </div>
-  );
-}
-
-export const FormikThirtyFastFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">Formik ADR: ThirtyFastFieldsPerformance</header>
-      <FastFieldFormBuilder propFields={thirtyFields} />
-    </div>
-  );
-}
 
 export const FormikPerformance = () => {
   return (

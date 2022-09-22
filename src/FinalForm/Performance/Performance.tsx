@@ -3,7 +3,7 @@ import { Box, Grid, TextField } from "@mui/material";
 import { Field, Form } from "react-final-form";
 import { setIn } from "final-form";
 import { DynamicFormValues, FieldsValues } from "../../types/types";
-import { fields, getInitialValues, tenFields, thirtyFields, twentyFields } from "../../utils/fields";
+import { fields, getInitialValues} from "../../utils/fields";
 import { getSchema } from "../../utils/schema";
 
 export const validate =
@@ -20,7 +20,7 @@ export const validate =
     }
   };
 
-const FormBuilder = (props: { propFields: FieldsValues[] }) => {
+export const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
   const initialValues: DynamicFormValues = getInitialValues(propFields);
   const onSubmit = (values: DynamicFormValues) => {
@@ -148,39 +148,6 @@ const SignupForm = () => {
         );
       }}
     />
-  );
-};
-
-export const FinalFormTenFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Final Form ADR: TenFieldsPerformance
-      </header>
-      <FormBuilder propFields={tenFields} />
-    </div>
-  );
-};
-
-export const FinalFormTwentyFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Final Form ADR: TwentyFieldsPerformance
-      </header>
-      <FormBuilder propFields={twentyFields} />
-    </div>
-  );
-};
-
-export const FinalFormThirtyFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Final Form ADR: ThirtyFieldsPerformance
-      </header>
-      <FormBuilder propFields={thirtyFields} />
-    </div>
   );
 };
 
