@@ -21,6 +21,7 @@ import {
   RHFThirtyFieldsPerformance,
   RHFTwentyFieldsPerformance,
   RHFPerformance,
+  RHFAutoFocus,
 } from "./RHF";
 import {
   FinalFormMaterial,
@@ -76,7 +77,7 @@ export const App = () => {
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="/formik/FormikComponents">
+              <Link href="/formik/components">
                 Formik: FormikComponents
               </Link>
             </ListItem>
@@ -87,6 +88,9 @@ export const App = () => {
           <List>
             <ListItem>
               <Link href="/rhf/simple">RHF: Simple</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/autofocus">RHF: AutoFocus</Link>
             </ListItem>
             <ListItem>
               <Link href="/rhf/schema">RHF: Schema</Link>
@@ -177,6 +181,7 @@ export const App = () => {
         <Route path="/rhf/schema" element={<RHFSchema />} />
         <Route path="/rhf/material" element={<RHFMaterial />} />
         <Route path="/rhf/performance" element={<RHFPerformance />} />
+        <Route path="/rhf/autofocus" element={<RHFAutoFocus />} />
         <Route
           path="/rhf/tenfieldperformance"
           element={<RHFTenFieldsPerformance />}

@@ -1,37 +1,10 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { Box, Grid, TextField } from "@mui/material";
-import * as Yup from "yup";
 import { Field, Form } from "react-final-form";
 import { setIn } from "final-form";
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("Required")
-    .min(2, "Too Short!")
-    .max(50, "Too Long!"),
-  surname: Yup.string()
-    .required("Required")
-    .min(2, "Too Short!")
-    .max(50, "Too Long!"),
-  email: Yup.string().required("Required").email("Invalid email"),
-  password: Yup.string()
-    .required("Required")
-    .min(10, "Too Short!")
-    .max(30, "Too Long!")
-    .matches(/\d+/, { message: "Password no number" })
-    .matches(/[a-z]+/, { message: "Password no lowercase" })
-    .matches(/[A-Z]+/, { message: "Password no uppercase" })
-    .matches(/[!@#$%^&*()-+]+/, {
-      message: "Password no special char",
-    }),
-  age: Yup.number()
-    .required("Required")
-    .positive()
-    .integer()
-    .min(10, "Too yound!")
-    .max(100, "Too old!"),
-});
+import { SignupSchema } from "../../utils/schema";
+import { FormValues } from "../../types/types";
 
 export const validate = async (values: FormValues) => {
   try {
@@ -45,13 +18,6 @@ export const validate = async (values: FormValues) => {
   }
 };
 
-type FormValues = {
-  email: string;
-  name: string;
-  surname: string;
-  password: string;
-  age?: string;
-};
 
 const SignupForm = () => {
   const initialValues: FormValues = {
