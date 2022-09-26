@@ -1,3 +1,4 @@
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { List, ListItem, Link, Grid } from "@mui/material";
@@ -6,20 +7,13 @@ import {
   FormikMaterial,
   FormikSchema,
   FormikSimple,
-  FormikTenFieldsPerformance,
-  FormikThirtyFieldsPerformance,
-  FormikTwentyFieldsPerformance,
   FormikPerformance,
   FormikAutoFocus,
-  FormikThirtyFastFieldsPerformance,
 } from "./Formik";
 import {
   RHFMaterial,
   RHFSchema,
   RHFSimple,
-  RHFTenFieldsPerformance,
-  RHFThirtyFieldsPerformance,
-  RHFTwentyFieldsPerformance,
   RHFPerformance,
   RHFAutoFocus,
 } from "./RHF";
@@ -29,10 +23,18 @@ import {
   FinalFormAutofocus,
   FinalFormSchema,
   FinalFormSimple,
-  FinalFormTenFieldsPerformance,
-  FinalFormThirtyFieldsPerformance,
-  FinalFormTwentyFieldsPerformance,
 } from "./FinalForm";
+const FormikTenField = lazy(() => import("./Formik/Performance/TenField"));
+const FormikTwentyField = lazy(() => import("./Formik/Performance/TwentyField"));
+const FormikThirtyField = lazy(() => import("./Formik/Performance/ThirtyField"));
+const FormikThirtyFastField = lazy(() => import("./Formik/Performance/ThirtyFastField"));
+const RHFTenField = lazy(() => import("./RHF/Performance/TenField"));
+const RHFTwentyField = lazy(() => import("./RHF/Performance/TwentyFields"));
+const RHFThirtyField = lazy(() => import("./RHF/Performance/ThirtyFields"));
+const FFTenField = lazy(() => import("./FinalForm/Performance/TenField"));
+const FFTwentyField = lazy(() => import("./FinalForm/Performance/TwentyField"));
+const FFThirtyField = lazy(() => import("./FinalForm/Performance/ThirtyField"));
+
 
 export const App = () => {
   return (
@@ -154,75 +156,70 @@ export const App = () => {
           </List>
         </Grid>
       </Grid>
-      <Routes>
-        <Route path="/formik/simple" element={<FormikSimple />} />
-        <Route path="/formik/autofocus" element={<FormikAutoFocus />} />
-        <Route path="/formik/schema" element={<FormikSchema />} />
-        <Route path="/formik/material" element={<FormikMaterial />} />
-        <Route path="/formik/performance" element={<FormikPerformance />} />
-        <Route
-          path="/formik/tenfieldperformance"
-          element={<FormikTenFieldsPerformance />}
-        />
-        <Route
-          path="/formik/tweentyfieldperformance"
-          element={<FormikTwentyFieldsPerformance />}
-        />
-        <Route
-          path="/formik/thirtyfieldperformance"
-          element={<FormikThirtyFieldsPerformance />}
-        />
-        <Route
-          path="/formik/thirtyfastfieldsperformance"
-          element={<FormikThirtyFastFieldsPerformance />}
-        />
-        <Route path="/formik/components" element={<FormikComponents />} />
-        <Route path="/rhf/simple" element={<RHFSimple />} />
-        <Route path="/rhf/schema" element={<RHFSchema />} />
-        <Route path="/rhf/material" element={<RHFMaterial />} />
-        <Route path="/rhf/performance" element={<RHFPerformance />} />
-        <Route path="/rhf/autofocus" element={<RHFAutoFocus />} />
-        <Route
-          path="/rhf/tenfieldperformance"
-          element={<RHFTenFieldsPerformance />}
-        />
-        <Route
-          path="/rhf/tweentyfieldperformance"
-          element={<RHFTwentyFieldsPerformance />}
-        />
-        <Route
-          path="/rhf/thirtyfieldperformance"
-          element={<RHFThirtyFieldsPerformance />}
-        />
-        <Route
-          path="/rhf/thirtyfieldperformance"
-          element={<RHFThirtyFieldsPerformance />}
-        />
-        <Route path="/finalform/simple" element={<FinalFormSimple />} />
-        <Route path="/finalform/autofocus" element={<FinalFormAutofocus />} />
-        <Route path="/finalform/schema" element={<FinalFormSchema />} />
-        <Route path="/finalform/material" element={<FinalFormMaterial />} />
-        <Route
-          path="/finalform/performance"
-          element={<FinalFormPerformance />}
-        />
-        <Route
-          path="/finalform/tenfieldperformance"
-          element={<FinalFormTenFieldsPerformance />}
-        />
-        <Route
-          path="/finalform/tweentyfieldperformance"
-          element={<FinalFormTwentyFieldsPerformance />}
-        />
-        <Route
-          path="/finalform/thirtyfieldperformance"
-          element={<FinalFormThirtyFieldsPerformance />}
-        />
-        <Route
-          path="/finalform/thirtyfieldperformance"
-          element={<FinalFormThirtyFieldsPerformance />}
-        />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/formik/simple" element={<FormikSimple />} />
+          <Route path="/formik/autofocus" element={<FormikAutoFocus />} />
+          <Route path="/formik/schema" element={<FormikSchema />} />
+          <Route path="/formik/material" element={<FormikMaterial />} />
+          <Route path="/formik/performance" element={<FormikPerformance />} />
+          <Route
+            path="/formik/tenfieldperformance"
+            element={<FormikTenField />}
+          />
+          <Route
+            path="/formik/tweentyfieldperformance"
+            element={<FormikTwentyField />}
+          />
+          <Route
+            path="/formik/thirtyfieldperformance"
+            element={<FormikThirtyField />}
+          />
+          <Route
+            path="/formik/thirtyfastfieldsperformance"
+            element={<FormikThirtyFastField/>}
+          />
+          <Route path="/formik/components" element={<FormikComponents />} />
+          <Route path="/rhf/simple" element={<RHFSimple />} />
+          <Route path="/rhf/schema" element={<RHFSchema />} />
+          <Route path="/rhf/material" element={<RHFMaterial />} />
+          <Route path="/rhf/performance" element={<RHFPerformance />} />
+          <Route path="/rhf/autofocus" element={<RHFAutoFocus />} />
+          <Route
+            path="/rhf/tenfieldperformance"
+            element={<RHFTenField />}
+          />
+          <Route
+            path="/rhf/tweentyfieldperformance"
+            element={<RHFTwentyField />}
+          />
+          <Route
+            path="/rhf/thirtyfieldperformance"
+            element={<RHFThirtyField />}
+          />
+
+          <Route path="/finalform/simple" element={<FinalFormSimple />} />
+          <Route path="/finalform/autofocus" element={<FinalFormAutofocus />} />
+          <Route path="/finalform/schema" element={<FinalFormSchema />} />
+          <Route path="/finalform/material" element={<FinalFormMaterial />} />
+          <Route
+            path="/finalform/performance"
+            element={<FinalFormPerformance />}
+          />
+          <Route
+            path="/finalform/tenfieldperformance"
+            element={<FFTenField />}
+          />
+          <Route
+            path="/finalform/tweentyfieldperformance"
+            element={<FFTwentyField />}
+          />
+          <Route
+            path="/finalform/thirtyfieldperformance"
+            element={<FFThirtyField />}
+          />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };

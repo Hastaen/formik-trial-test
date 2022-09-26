@@ -3,11 +3,11 @@ import { Box, Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DynamicFormValues, FieldsValues } from "../../types/types";
-import { fields, getInitialValues, tenFields, thirtyFields, twentyFields } from "../../utils/fields";
+import { fields, getInitialValues } from "../../utils/fields";
 import { getSchema } from "../../utils/schema";
 
 
-const FormBuilder = (props: { propFields: FieldsValues[] }) => {
+export const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
 
   const { control, handleSubmit } = useForm<DynamicFormValues>({
@@ -105,33 +105,6 @@ const SignupForm = () => {
         </Grid>
       </Grid>
     </form>
-  );
-};
-
-export const RHFTenFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">RHF ADR: TenFieldsPerformance</header>
-      <FormBuilder propFields={tenFields} />
-    </div>
-  );
-};
-
-export const RHFTwentyFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">RHF ADR: TwentyFieldsPerformance</header>
-      <FormBuilder propFields={twentyFields} />
-    </div>
-  );
-};
-
-export const RHFThirtyFieldsPerformance = () => {
-  return (
-    <div className="App">
-      <header className="App-header">RHF ADR: ThirtyFieldsPerformance</header>
-      <FormBuilder propFields={thirtyFields} />
-    </div>
   );
 };
 
