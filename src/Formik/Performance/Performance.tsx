@@ -164,3 +164,5 @@ export const FormikPerformance = () => {
     </div>
   );
 };
+
+export default FormikPerformance;

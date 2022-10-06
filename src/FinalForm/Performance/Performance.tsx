@@ -159,3 +159,5 @@ export const FinalFormPerformance = () => {
     </div>
   );
 };
+
+export default FinalFormPerformance;

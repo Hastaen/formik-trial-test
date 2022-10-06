@@ -116,3 +116,5 @@ export const RHFPerformance = () => {
     </div>
   );
 };
+
+export default RHFPerformance;
