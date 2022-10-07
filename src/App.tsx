@@ -7,30 +7,30 @@ import {
   FormikMaterial,
   FormikSchema,
   FormikSimple,
-  FormikPerformance,
   FormikAutoFocus,
 } from "./Formik";
 import {
   RHFMaterial,
   RHFSchema,
   RHFSimple,
-  RHFPerformance,
   RHFAutoFocus,
 } from "./RHF";
 import {
   FinalFormMaterial,
-  FinalFormPerformance,
   FinalFormAutofocus,
   FinalFormSchema,
   FinalFormSimple,
 } from "./FinalForm";
+const FormikPerf = lazy(() => import("./Formik/Performance/Performance"));
 const FormikTenField = lazy(() => import("./Formik/Performance/TenField"));
 const FormikTwentyField = lazy(() => import("./Formik/Performance/TwentyField"));
 const FormikThirtyField = lazy(() => import("./Formik/Performance/ThirtyField"));
 const FormikThirtyFastField = lazy(() => import("./Formik/Performance/ThirtyFastField"));
+const RHFPerf = lazy(() => import("./RHF/Performance/Performance"));
 const RHFTenField = lazy(() => import("./RHF/Performance/TenField"));
 const RHFTwentyField = lazy(() => import("./RHF/Performance/TwentyFields"));
 const RHFThirtyField = lazy(() => import("./RHF/Performance/ThirtyFields"));
+const FFTPerf = lazy(() => import("./FinalForm/Performance/Performance"));
 const FFTenField = lazy(() => import("./FinalForm/Performance/TenField"));
 const FFTwentyField = lazy(() => import("./FinalForm/Performance/TwentyField"));
 const FFThirtyField = lazy(() => import("./FinalForm/Performance/ThirtyField"));
@@ -162,7 +162,7 @@ export const App = () => {
           <Route path="/formik/autofocus" element={<FormikAutoFocus />} />
           <Route path="/formik/schema" element={<FormikSchema />} />
           <Route path="/formik/material" element={<FormikMaterial />} />
-          <Route path="/formik/performance" element={<FormikPerformance />} />
+          <Route path="/formik/performance" element={<FormikPerf />} />
           <Route
             path="/formik/tenfieldperformance"
             element={<FormikTenField />}
@@ -183,7 +183,7 @@ export const App = () => {
           <Route path="/rhf/simple" element={<RHFSimple />} />
           <Route path="/rhf/schema" element={<RHFSchema />} />
           <Route path="/rhf/material" element={<RHFMaterial />} />
-          <Route path="/rhf/performance" element={<RHFPerformance />} />
+          <Route path="/rhf/performance" element={<RHFPerf />} />
           <Route path="/rhf/autofocus" element={<RHFAutoFocus />} />
           <Route
             path="/rhf/tenfieldperformance"
@@ -204,7 +204,7 @@ export const App = () => {
           <Route path="/finalform/material" element={<FinalFormMaterial />} />
           <Route
             path="/finalform/performance"
-            element={<FinalFormPerformance />}
+            element={<FFTPerf />}
           />
           <Route
             path="/finalform/tenfieldperformance"
