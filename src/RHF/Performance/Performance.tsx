@@ -13,6 +13,7 @@ export const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { control, handleSubmit } = useForm<DynamicFormValues>({
     defaultValues: getInitialValues(propFields),
     resolver: yupResolver(getSchema(propFields)),
+    mode: 'onBlur',
   });
 
   const onSubmit = (values: DynamicFormValues) => {
@@ -63,6 +64,7 @@ const SignupForm = () => {
   const { control, handleSubmit } = useForm<DynamicFormValues>({
     defaultValues: getInitialValues(fields),
     resolver: yupResolver(getSchema(fields)),
+    mode: 'onBlur',
   });
 
   const onSubmit = (values: DynamicFormValues) => {

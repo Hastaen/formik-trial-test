@@ -30,8 +30,9 @@ const SignupForm = () => {
               name="name"
               label="Name"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.name}
-              {...(formik.errors.name  && formik.touched.name && {
+              {...(formik.errors.name && formik.touched.name && {
                 error: true,
                 helperText: formik.errors.name,
               })}
@@ -45,6 +46,7 @@ const SignupForm = () => {
               name="surname"
               label="Surname"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.surname}
               {...(formik.errors.surname  && formik.touched.surname && {
                 error: true,
@@ -60,6 +62,7 @@ const SignupForm = () => {
               name="email"
               label="Email Address"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
               {...(formik.errors.email && formik.touched.email && {
                 error: true,
@@ -76,6 +79,7 @@ const SignupForm = () => {
               name="password"
               label="Password"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.password}
               {...(formik.errors.password  && formik.touched.password && {
                 error: true,
@@ -91,6 +95,7 @@ const SignupForm = () => {
               name="age"
               label="Age"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.age}
               {...(formik.errors.age  && formik.touched.age && {
                 error: true,

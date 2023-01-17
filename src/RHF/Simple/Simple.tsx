@@ -9,6 +9,7 @@ const SignupForm = () => {
     defaultValues: {
       email: "",
     },
+    mode: 'onBlur',
   });
 
   const onSubmit = (values: SimpleFormValues) => {
