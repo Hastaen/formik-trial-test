@@ -14,6 +14,7 @@ import {
   RHFSchema,
   RHFSimple,
   RHFAutoFocus,
+  RHFCustom,
 } from "./RHF";
 import {
   FinalFormMaterial,
@@ -101,6 +102,9 @@ export const App = () => {
               <Link href="/rhf/material">RHF: Material</Link>
             </ListItem>
             <ListItem>
+              <Link href="/rhf/custom">RHF: Custom</Link>
+            </ListItem>
+            <ListItem>
               <Link href="/rhf/performance">RHF: Performance</Link>
             </ListItem>
             <ListItem>
@@ -184,6 +188,7 @@ export const App = () => {
           <Route path="/rhf/schema" element={<RHFSchema />} />
           <Route path="/rhf/material" element={<RHFMaterial />} />
           <Route path="/rhf/performance" element={<RHFPerf />} />
+          <Route path="/rhf/custom" element={<RHFCustom />} />
           <Route path="/rhf/autofocus" element={<RHFAutoFocus />} />
           <Route
             path="/rhf/tenfieldperformance"
