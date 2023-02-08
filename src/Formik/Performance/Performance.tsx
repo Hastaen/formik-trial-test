@@ -30,6 +30,7 @@ export const FormBuilder = ( props: { propFields: FieldsValues[]}) => {
                   name={`${name}-${index}`}
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   variant="outlined"
                   value={formik.values[`${name}-${index}`]}
                   {...(formik.errors[`${name}-${index}`] && formik.touched[`${name}-${index}`] && {
@@ -77,6 +78,7 @@ export const FastFieldFormBuilder = (props: { propFields: FieldsValues[] }) => {
                           name={`${name}-${index}`}
                           label={`${label}-${index}`}
                           onChange={formikProps.handleChange}
+                          onBlur={formikProps.handleBlur}
                           variant="outlined"
                           // @ts-ignore
                           value={formikProps.values[`${name}-${index}`]}
@@ -131,6 +133,7 @@ const SignupForm = () => {
                   name={`${name}-${index}`}
                   label={`${label}-${index}`}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   variant="outlined"
                   value={formik.values[`${name}-${index}`]}
                   {...(formik.errors[`${name}-${index}`] &&

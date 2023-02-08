@@ -16,6 +16,7 @@ const SignupForm = () => {
       age: undefined,
     },
     resolver: yupResolver(SignupSchema),
+    mode: 'onBlur',
   });
 
   const onSubmit = (values: FormValues) => {
@@ -30,7 +31,7 @@ const SignupForm = () => {
             <Controller
               name="name"
               control={control}
-              render={({ field, fieldState: { error } }) => (
+              render={({ field, fieldState: { error, isTouched } }) => (
                 <TextField
                   label="Name"
                   {...field}
@@ -103,11 +104,11 @@ const SignupForm = () => {
             <Controller
               name="age"
               control={control}
-              render={({ field, fieldState: { error } }) => (
+              render={({ field, fieldState: { error, isTouched } }) => (
                 <TextField
                   label="Age"
                   {...field}
-                  {...(error && {
+                  {...(error && isTouched && {
                     error: true,
                     helperText: error.message,
                   })}

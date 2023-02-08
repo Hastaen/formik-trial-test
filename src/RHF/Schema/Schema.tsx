@@ -20,6 +20,7 @@ const SignupForm = () => {
       age: undefined,
     },
     resolver: yupResolver(SignupSchema),
+    mode: 'onBlur',
   });
 
   const onSubmit = (values: FormValues) => {

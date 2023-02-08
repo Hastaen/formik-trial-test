@@ -44,7 +44,7 @@ const SignupForm = () => {
                 <Box display="flex" alignItems="start" flexDirection="column">
                   <Field id="name" name="name">
                     {({ input }) => {
-                      const { name, placeholder } = input;
+                      const { name } = input;
                       const error = errors?.[name];
                       const touch = touched?.[name];
                       return (

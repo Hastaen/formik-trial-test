@@ -15,6 +15,7 @@ const SignupForm = () => {
     defaultValues: {
       email: "",
     },
+    mode: 'onBlur',
   });
 
   const { ref, ...rest } = register('email');
