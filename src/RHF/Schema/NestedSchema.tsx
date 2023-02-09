@@ -10,13 +10,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DynamicFormValues } from '../../types/types';
 import * as Yup from 'yup';
-
-type NestedSchema = {
-  type: 'object' | 'string' | 'custom';
-  properties?: {
-    [label: string]: NestedSchema;
-  };
-};
+import { getNestedInitialValues, NestedSchema } from '../../utils/fields';
 
 const schema: NestedSchema = {
   type: 'object',
@@ -45,31 +39,6 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().required('Required').email('Invalid email'),
   }),
 });
-
-const getInitialValues = (schema: NestedSchema, parent?: string): any => {
-  const { properties } = schema;
-
-  if (properties) {
-    const labels = Object.keys(properties);
-
-    return labels
-      .map((label) => {
-        const { type } = properties[label];
-        if (type === 'object') {
-          return { [label]: getInitialValues(properties[label], label) };
-        }
-        return { [`${label}`]: 'test' };
-      })
-      .reduce(
-        (prev, curr) => ({
-          ...prev,
-          ...curr,
-        }),
-        {}
-      );
-  }
-  return null;
-};
 
 const CustomInput = ({ name }: { name: string }) => {
   return (
@@ -150,7 +119,7 @@ const generateForm = (schema: NestedSchema, parent?: string) => {
 
 const SignupForm = () => {
   const methods = useForm<DynamicFormValues>({
-    defaultValues: getInitialValues(schema),
+    defaultValues: getNestedInitialValues(schema),
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
   });

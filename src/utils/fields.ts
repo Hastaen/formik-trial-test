@@ -1,5 +1,12 @@
 import { FieldsValues } from "../types/types";
 
+export type NestedSchema = {
+  type: 'object' | 'string' | 'custom';
+  properties?: {
+    [label: string]: NestedSchema;
+  };
+};
+
 export const defaultFields: FieldsValues[] = [
   {
     id: "name",
@@ -75,4 +82,29 @@ export const getInitialValues = (fields: FieldsValues[]) => {
     }),
     {}
   );
+};
+
+export const getNestedInitialValues = (schema: NestedSchema, parent?: string): any => {
+  const { properties } = schema;
+
+  if (properties) {
+    const labels = Object.keys(properties);
+
+    return labels
+      .map((label) => {
+        const { type } = properties[label];
+        if (type === 'object') {
+          return { [label]: getNestedInitialValues(properties[label], label) };
+        }
+        return { [`${label}`]: 'test' };
+      })
+      .reduce(
+        (prev, curr) => ({
+          ...prev,
+          ...curr,
+        }),
+        {}
+      );
+  }
+  return null;
 };
