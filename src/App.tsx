@@ -15,6 +15,7 @@ import {
   RHFSimple,
   RHFAutoFocus,
   RHFCustom,
+  RHFNestedSchema,
 } from "./RHF";
 import {
   FinalFormMaterial,
@@ -97,6 +98,9 @@ export const App = () => {
             </ListItem>
             <ListItem>
               <Link href="/rhf/schema">RHF: Schema</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/rhf/nestedschema">RHF: Nested Schema</Link>
             </ListItem>
             <ListItem>
               <Link href="/rhf/material">RHF: Material</Link>
@@ -186,6 +190,7 @@ export const App = () => {
           <Route path="/formik/components" element={<FormikComponents />} />
           <Route path="/rhf/simple" element={<RHFSimple />} />
           <Route path="/rhf/schema" element={<RHFSchema />} />
+          <Route path="/rhf/nestedschema" element={<RHFNestedSchema />} />
           <Route path="/rhf/material" element={<RHFMaterial />} />
           <Route path="/rhf/performance" element={<RHFPerf />} />
           <Route path="/rhf/custom" element={<RHFCustom />} />

@@ -6,7 +6,6 @@ import { DynamicFormValues, FieldsValues } from "../../types/types";
 import { fields, getInitialValues } from "../../utils/fields";
 import { getSchema } from "../../utils/schema";
 
-
 export const FormBuilder = (props: { propFields: FieldsValues[] }) => {
   const { propFields } = props;
 
